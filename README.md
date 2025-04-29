@@ -1,101 +1,130 @@
- Book Review API
+# Book Review API
 
 A Django REST Framework project for managing a digital book review library with JWT Authentication system.
 
+## How to Run the Project Locally
 
+1. **Clone the repository:**
 
- How to Run the Project Locally
+   ```bash
+   git clone https://github.com/S190197202/book-review-api.git
+   cd book-review-api
+   ```
 
-1.Clone the repository:
+2. **Create and activate a virtual environment:**
 
-```bash
-git clone https://github.com/S190197202/book-review-api.git
-cd book-review-api
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate   # For Mac/Linux
+   # or
+   .venv\Scripts\activate      # For Windows
+   ```
 
+3. **Install the project dependencies:**
 
-2.Create and activate a virtual environment:
-python -m venv .venv
-source .venv/bin/activate   # For Mac/Linux
-# or
-.venv\Scripts\activate      # For Windows
+   ```bash
+   pip install -r requirements.txt
+   ```
 
+4. **Apply migrations:**
 
-3.Install the project dependencies:
-pip install -r requirements.txt
+   ```bash
+   python manage.py migrate
+   ```
 
+5. **Run the development server:**
 
-4.Apply migrations:
-python manage.py migrate
+   ```bash
+   python manage.py runserver
+   ```
 
+## 🧪 How to Test Each Endpoint
+You can use Postman or curl to test the API endpoints.
 
-5.Run the development server:
-python manage.py runserver
+### Authentication
 
+- **Register a new user:**
+  ```http
+  POST /api/register/
+  ```
 
-🧪 How to Test Each Endpoint
-You can use Postman or curl to test the API endpoints
+- **Obtain JWT token:**
+  ```http
+  POST /api/token/
+  ```
 
-Authentication
+- **Refresh JWT token:**
+  ```http
+  POST /api/token/refresh/
+  ```
 
-Register a new user
-POST /api/register/
+- **Change password:**
+  ```http
+  POST /api/change-password/
+  ```
 
-Obtain JWT token
-POST /api/token/
+### Book Management
 
-Refresh JWT token
-POST /api/token/refresh/
+- **List all books:**
+  ```http
+  GET /api/books/
+  ```
 
-Change password
-POST /api/change-password/
+- **Retrieve book details:**
+  ```http
+  GET /api/books/<id>/
+  ```
 
-Book Management
+- **Add a new book (Admin only):**
+  ```http
+  POST /api/books/
+  ```
 
-List all books
-GET /api/books/
+- **Edit a book (Admin only):**
+  ```http
+  PUT /api/books/<id>/
+  ```
 
-Retrieve book details
-GET /api/books/<id>/
+- **Delete a book (Admin only):**
+  ```http
+  DELETE /api/books/<id>/
+  ```
 
-Add a new book (Admin only)
-POST /api/books/
+### Review Management
 
-Edit a book (Admin only)
-PUT /api/books/<id>/
+- **Add a review to a book:**
+  ```http
+  POST /api/books/<book_id>/reviews/
+  ```
 
-Delete a book (Admin only)
-DELETE /api/books/<id>/
+- **List all reviews for a book:**
+  ```http
+  GET /api/books/<book_id>/reviews/
+  ```
 
-Review Management
+- **Edit a review (Review owner only):**
+  ```http
+  PUT /api/reviews/<id>/
+  ```
 
-Add a review to a book
-POST /api/books/<book_id>/reviews/
+- **Delete a review (Review owner only):**
+  ```http
+  DELETE /api/reviews/<id>/
+  ```
 
-List all reviews for a book
-GET /api/books/<book_id>/reviews/
-
-Edit a review (Review owner only)
-PUT /api/reviews/<id>/
-
-Delete a review (Review owner only)
-DELETE /api/reviews/<id>/
-
-Authentication Mechanism
+## Authentication Mechanism
 This project uses JWT (JSON Web Tokens) for authentication, powered by SimpleJWT:
 
 Upon successful login, users receive an access token and a refresh token.
 
-The access token is used for accessing secured API endpoints.
+- The access token is used for accessing secured API endpoints.
+- When the access token expires, the refresh token can be used to obtain a new access token without needing to log in again.
 
-When the access token expires, the refresh token can be used to obtain a new access token without needing to log in again.
+## Admin Credentials for Testing
+- **Admin Panel URL:** `/admin/`
+- **Username:** admin
+- **Password:** Admin1122233
 
-
- Admin Credentials for Testing
-Admin Panel URL: /admin/
-
-Username: admin
-
-Password: Admin1122233
 
 
 
